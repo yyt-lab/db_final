@@ -1,4 +1,5 @@
 ﻿using db_final.Common;
+using db_final.DataAccess;
 using db_final.model;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace db_final.viewmodel
         public LoginViewModel()
         {
             //this.LoginModel.UserName = "yyyt";
-            this.LoginModel.PassWord = "123123";
+            //this.LoginModel.PassWord = "123123";
             this.CloseWindowCommand = new CommandBase();
             this.CloseWindowCommand.DoExecute = new Action<object>((o) => {  // 匿名委托
                 (o as Window).Close();
@@ -38,20 +39,40 @@ namespace db_final.viewmodel
         }
         private void DoLogin(object o)   // 处理登录逻辑
         {
-            this.ErrorMessage ="";
-            if (String.IsNullOrEmpty(LoginModel.PassWord))
-            {
-                this.ErrorMessage = "请输入密码!";
-                return;
-            }
+            this.ErrorMessage = "";
+            //this.ShowProgress = Visibility.Visible;
             if (String.IsNullOrEmpty(LoginModel.UserName))
             {
                 this.ErrorMessage = "请输入用户名!";
                 return;
             }
 
-            MessageBox.Show("hhhaha");
-        }
+            if (String.IsNullOrEmpty(LoginModel.PassWord))
+            {
+                this.ErrorMessage = "请输入密码!";
+                return;
+            }
 
+            try
+            {
+                var user = LocalDataAccess.GetInstance().CheckUserInfo(LoginModel.UserName, pwd: LoginModel.PassWord);
+                if (user == null)
+                {
+                    throw new Exception("登陆失败！用户名获密码错误");
+                }
+                GlobalValues.UserInfo = user;
+
+                Application.Current.Dispatcher.Invoke(new Action(() =>  // 操作窗口线程的控件，必须这样写
+                {
+                    (o as Window).DialogResult = true;
+                }));
+                   
+
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
     }
 }

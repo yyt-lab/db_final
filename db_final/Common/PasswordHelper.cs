@@ -12,10 +12,11 @@ namespace db_final.Common
     {
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordHelper),
-                new FrameworkPropertyMetadata("", new PropertyChangedCallback(OnpropertyChanged)));
-        public static string GetPassword(DependencyObject d)
+                new PropertyMetadata("", OnPasswordPropertyChanged));
+
+        public static string GetPassword(DependencyObject dobj)
         {
-            return d.GetValue(PasswordProperty).ToString();
+            return dobj.GetValue(PasswordProperty) as string;
         }
 
         public static void SetPassword(DependencyObject d, string value)
@@ -23,12 +24,23 @@ namespace db_final.Common
             d.SetValue(PasswordProperty, value);
         }
 
+        public static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PasswordBox passwordBox = d as PasswordBox;
+            if (passwordBox == null) return;
+            passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+            if (!_isUpdate)
+                passwordBox.Password = e.NewValue?.ToString();
+            passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+        }
+
         public static readonly DependencyProperty AttachProperty =
             DependencyProperty.RegisterAttached("Attach", typeof(bool), typeof(PasswordHelper),
-                new FrameworkPropertyMetadata(default(bool), new PropertyChangedCallback(OnAttached)));
-        public static bool GetAttach(DependencyObject d)
+             new PropertyMetadata(default(bool), OnAttachPropertyChanged));
+
+        public static bool GetAttach(DependencyObject dobj)
         {
-            return (bool) d.GetValue(PasswordProperty);
+            return (bool)dobj.GetValue(PasswordProperty);
         }
 
         public static void SetAttach(DependencyObject d, bool value)
@@ -36,28 +48,20 @@ namespace db_final.Common
             d.SetValue(PasswordProperty, value);
         }
 
-        static bool _isUpdating = false;
-
-        private static void OnpropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static void OnAttachPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            PasswordBox password = d as PasswordBox;
-            password.PasswordChanged -= Password_PasswordChanged;
-            if (!_isUpdating)
-                password.Password = e.NewValue?.ToString();
-            password.PasswordChanged += Password_PasswordChanged;
-        }
-        private static void OnAttached(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PasswordBox password = d as PasswordBox;
-            password.PasswordChanged += Password_PasswordChanged;
+            PasswordBox passwordBox = d as PasswordBox;
+            passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
         }
 
-        private static void Password_PasswordChanged(object sender, RoutedEventArgs e)
+
+        private static bool _isUpdate = false;
+        private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;
-            _isUpdating = true;
+            _isUpdate = true;
             SetPassword(passwordBox, passwordBox.Password);
-            _isUpdating = false;
+            _isUpdate = false;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace db_final.model
         // 创建带有通知属性的输入输出
         public void DoNotify([CallerMemberName] string propName="" )  //参数默认值为caller member的值
         {
+            // 在主线程上修改修改必须调用INVOKE方法
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName)); // 只有非NULL的情况，才会赋值
         }
     }

@@ -184,7 +184,7 @@
             </Grid.RowDefinitions>
             <Border Background="#007dfa" CornerRadius="10,10,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
             <Button VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Template="{StaticResource CloseButtonTemplate}"
-                    Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=window}"/>
+                    Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=window}" Click="Button_Click"/>
             <!--stackpanel以堆叠方式，设置页面布局-->
             <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,30">
                 <Border Background="Transparent" VerticalAlignment="center" HorizontalAlignment="center">
@@ -208,10 +208,10 @@
                 <TextBox Height="40" Grid.Row="0" FontSize="18" Text="{Binding LoginModel.UserName}" Foreground="#555" Style="{DynamicResource UserNameTextBoxStyle}"/>
                 <PasswordBox Height="40" Grid.Row="1" FontSize="18" Foreground="#555" Style="{DynamicResource PasswordBoxStyle}"
                              common:PasswordHelper.Attach="True"
-                             common:PasswordHelper.Password="{Binding LoginModel.PassWord}"/>
+                             common:PasswordHelper.Password="{Binding LoginModel.PassWord,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <!--登录按钮使用模板-->
                 <Button Content="登   录" Grid.Row="2" Template="{StaticResource LoginButtonTemplate}" FontSize="18" Foreground="White"
-                        Command="{Binding LoginCommand}"/>
+                        Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=window}"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" 
                          FontFamily="../resources/fonts/#iconfont" TextWrapping="Wrap"/>
             </Grid>

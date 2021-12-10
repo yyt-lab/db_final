@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:db_final"
-             StartupUri="view/LoginView.xaml">
-    <Application.Resources>
+             ShutdownMode="OnExplicitShutdown">
+    <!--设置关闭模式为所有应用程序退出才会关闭-->
+        <Application.Resources>
          
     </Application.Resources>
 </Application>
