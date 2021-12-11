@@ -18,6 +18,9 @@ namespace db_final.viewmodel
         public ObservableCollection <BookModel> BookInfoList_FromDB { get; set; }
         public CommandBase Category_MenuChanged { get; set; }
         public CommandBase Available_MenuChanged { get; set; }
+
+        public CommandBase btn_delete { get; set; }
+
         private string CurrentCategory;
         private string CurrentState;
         public BookInfoModel()
@@ -30,11 +33,35 @@ namespace db_final.viewmodel
             this.Available_MenuChanged.DoCanExecute = new Func<object, bool>((o) => true);
             this.Available_MenuChanged.DoExecute = new Action<object>(DoAvailablefilter);
 
+            this.btn_delete = new CommandBase();
+            this.btn_delete.DoCanExecute = new Func<object, bool>((o) => true);
+            this.btn_delete.DoExecute = new Action<object>(DeleteDromDB);
+
             this.CurrentCategory = "";
             this.CurrentState = "";
 
             InitCategory();
             InitBookInfo();
+        }
+
+        private void DeleteDromDB(object o )
+        {
+            string BookName = o.ToString();
+            try
+            {
+                LocalDataAccess.GetInstance().DeleteBook(BookName);
+                BookInfoList_FromDB.Clear();
+
+                foreach (var item in LocalDataAccess.GetInstance().GetBookInfos(Category: CurrentCategory,State: CurrentState))
+                {
+                    BookInfoList_FromDB.Add(item);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("删除失败\n" + ex.Message);
+            }
+
         }
         private void DoCategoryfilter(object o)
         {

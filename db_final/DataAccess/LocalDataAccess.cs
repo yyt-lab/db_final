@@ -217,6 +217,32 @@ namespace db_final.DataAccess
                 this.Dispose();
             }
         }
+        public void DeleteBook(string BookName)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    string sql = "delete from bookinfo where BookName = @BookName";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@BookName", MySqlDbType.VarChar)
+                    {
+                        Value = BookName
+                    });
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
+
 
     }
 }

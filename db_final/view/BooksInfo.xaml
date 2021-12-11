@@ -134,11 +134,20 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
                             <TextBlock Margin="5,0">
-                                <Hyperlink  Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}">详情</Hyperlink>
+                                <Hyperlink  Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}">
+                                    <Hyperlink.Style>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
+                                                <Setter Property="TextBlock.Foreground" Value="Black"/>
+                                            </Style>
+                                        </Hyperlink.Style>
+                                    详情
+                                </Hyperlink>
                             </TextBlock>
                             <TextBlock Margin="5,0">
-                                <Hyperlink  Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}">删除</Hyperlink>
-                            </TextBlock>
+                                <!--<Hyperlink Click="Button_Click" Command="{Binding btn_delete}" CommandParameter="{Binding BookName}">删除</Hyperlink>-->
+                                <Button Content="删除" Background="Transparent" Foreground="Black" Command="{Binding DataContext.btn_delete,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}" CommandParameter="{Binding BookName}"/>
+                                        </TextBlock>
                         </StackPanel>
                     </Grid>
                         </DataTemplate>

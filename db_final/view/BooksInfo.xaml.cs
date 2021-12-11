@@ -1,4 +1,5 @@
-﻿using db_final.viewmodel;
+﻿using db_final.DataAccess;
+using db_final.viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,7 +37,13 @@ namespace db_final.view
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //LocalDataAccess.GetInstance().DeleteBook();
             new MainView().ShowDialog();
+        }
+
+        private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
