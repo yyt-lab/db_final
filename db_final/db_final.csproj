@@ -139,9 +139,13 @@
     <Compile Include="Common\PasswordHelper.cs" />
     <Compile Include="DataAccess\DataEntity\UserEntity.cs" />
     <Compile Include="DataAccess\LocalDataAccess.cs" />
+    <Compile Include="model\BookModel.cs" />
+    <Compile Include="model\CateItemModel.cs" />
     <Compile Include="model\LoginModel.cs" />
     <Compile Include="model\NotifyBase.cs" />
     <Compile Include="model\UserModel.cs" />
+    <Compile Include="viewmodel\AddBookViewModel.cs" />
+    <Compile Include="viewmodel\BookInfoModel.cs" />
     <Compile Include="view\BooksInfo.xaml.cs">
       <DependentUpon>BooksInfo.xaml</DependentUpon>
     </Compile>

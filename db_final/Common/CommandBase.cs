@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace db_final.Common
 {
-    class CommandBase : ICommand
+    public class CommandBase : ICommand
     {
         public event EventHandler CanExecuteChanged;
 

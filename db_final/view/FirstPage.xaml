@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:db_final.viewmodel"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid Margin="0,10,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height ="160"/>
+            <RowDefinition Height ="200"/>
             <RowDefinition Height ="360"/>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -19,22 +19,27 @@
                     <DropShadowEffect Color="Gray" ShadowDepth="8" BlurRadius="5" Opacity="0.3" Direction="270"/>
                 </Border.Effect>
                 <Grid>
-                    <lvc:CartesianChart Margin="0,0,0,5">
+                    <lvc:CartesianChart Margin="0,0,0,20">
                         <lvc:CartesianChart.Series>
-                            <lvc:LineSeries Stroke="#FECC71" Fill="#FFF2DE" PointGeometrySize="0" Values="1,2,3,4,5,6,7,8,9,10"/>
+                            <lvc:LineSeries Stroke="#FECC71" Fill="#FFF2DE" PointGeometrySize="10" Values="112,336,324,123,456,724,532"/>
                         </lvc:CartesianChart.Series>
                         <lvc:CartesianChart.AxisX>
-                            <lvc:Axis ShowLabels="False"/>
+                            <lvc:Axis  ShowLabels="True" Labels="Mon,Tue,Sat,Thu,Fri,Sat,Sun"  FontSize="14" LabelsRotation="-30">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                            
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis ShowLabels="False"/>
+                            <lvc:Axis ShowLabels="True" MinValue="0" MaxValue="1000"  FontSize="14" Title="Number"/>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="15,15,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="15,15,0,5">
                         <!--<Border Width="36" Height="36" CornerRadius="10" Background="#fff5e9" />-->
-                        <TextBlock Text="&#xe620;" FontFamily="../resources/fonts/#iconfont" Foreground="#FFD94328" FontSize="18"/>
-                        <TextBlock Text="   学生每日借阅情况" Foreground="#FFFC6442" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="&#xe620;" FontFamily="../resources/fonts/#iconfont" Foreground="#FFE6AC09" FontSize="18"/>
+                        <TextBlock Text="   学生每日借阅情况" Foreground="#FFE6AC09" FontSize="12" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -42,11 +47,59 @@
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" ShadowDepth="8" BlurRadius="5" Opacity="0.3" Direction="270"/>
                 </Border.Effect>
+                <Grid>
+                    <lvc:CartesianChart Margin="0,0,0,20">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Stroke="#FFF56037" Fill="#FFFEB1AF" PointGeometrySize="10" Values="112,336,324,123,456,724,532"/>
+                        </lvc:CartesianChart.Series>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis  ShowLabels="True" Labels="Mon,Tue,Sat,Thu,Fri,Sat,Sun"  FontSize="14" LabelsRotation="-30">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis ShowLabels="True" MinValue="0" MaxValue="1000"  FontSize="14" Title="Number"/>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="15,15,0,5">
+                        <!--<Border Width="36" Height="36" CornerRadius="10" Background="#fff5e9" />-->
+                        <TextBlock Text="&#xe63f;" FontFamily="../resources/fonts/#iconfont" Foreground="#FFFB5019" FontSize="18"/>
+                        <TextBlock Text="   学生每日还书情况" Foreground="#FFFB460C" FontSize="12" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
             </Border>
             <Border CornerRadius="5" Background="White" Margin="10" >
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" ShadowDepth="8" BlurRadius="5" Opacity="0.3" Direction="270"/>
                 </Border.Effect>
+                <Grid>
+                    <lvc:CartesianChart Margin="0,0,0,20" Foreground="#FF2648EB">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Stroke="#FF8887F3" Fill="#FFAACAF6" PointGeometrySize="10" Values="0,0,0,0,321,623,834,565,1034,1634,1854,1286"/>
+                        </lvc:CartesianChart.Series>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis  ShowLabels="True" Title="Hours" Labels="0,2,4,6,8,10,12,14,16,18,20,22"  FontSize="14"  LabelsRotation="-30">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis ShowLabels="True" MinValue="0" Title="Number" MaxValue="2000"  FontSize="14"/>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="15,15,0,5">
+                        <!--<Border Width="36" Height="36" CornerRadius="10" Background="#fff5e9" />-->
+                        <TextBlock Text="&#xe8a9;" FontFamily="../resources/fonts/#iconfont" Foreground="#FF0914E6" FontSize="18"/>
+                        <TextBlock Text="   学生每日在馆情况" Foreground="#FF0914E6" FontSize="12" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
             </Border>
             <!--<Border CornerRadius="5" Background="White" Margin="10" >
                 <Border.Effect>
@@ -54,6 +107,29 @@
                 </Border.Effect>
             </Border>-->
         </UniformGrid>
-        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Margin="15,15,15,100" Background="#FF3A7FDE" CornerRadius="30">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.3" Direction="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1">
+                        <TextBlock  Margin="20" FontSize="18" Text="欢迎使用NWPU图书馆管理系统" Foreground="White" FontWeight="Bold"></TextBlock>
+                        <TextBlock Margin="20,0,20,0" LineHeight="20" FontSize="18"  Foreground="White"
+                                   Text="您可以查看图书信息，查看学生状态信息，还可以完成书籍增加、删除和修改以及对学生借阅、续借、归还的确认。"
+                                   TextWrapping="Wrap" ></TextBlock>
+                    </StackPanel>
+                    <TextBlock></TextBlock>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

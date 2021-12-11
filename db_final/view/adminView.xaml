@@ -78,7 +78,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <!--设置整个背景 白色+阴影-->
-    <Border Margin="5" Background="White" CornerRadius="30">
+    <Border Margin="5" Background="#f7f9fa" CornerRadius="30">
         <Border.Effect>
             <DropShadowEffect Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.3" Direction="0"/>
         </Border.Effect>
@@ -123,13 +123,13 @@
                                  Command="{Binding NavCommandChanged}" CommandParameter="FirstPage"/>
                     <RadioButton Content="图书信息" Style="{StaticResource NavButtonStyle}" IsChecked="True"
                                   Command="{Binding NavCommandChanged}" CommandParameter="BooksInfo"/>
-                    <RadioButton Content="借阅查询" Style="{StaticResource NavButtonStyle}" IsChecked="True"/>
+                    <RadioButton Content="个人查询" Style="{StaticResource NavButtonStyle}" IsChecked="True"/>
                     <!--<RadioButton Content="年度统计"/>-->
                 </StackPanel>
 
                 <TextBox Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Height="32" Width="300" 
                          Template="{StaticResource SearchTextTemplate}" Text="{Binding SearchText}"/>
-                <ContentControl Grid.Row="2" Content="{Binding MainContent}">
+                <ContentControl Grid.Row="2" Grid.Column="1" Content="{Binding MainContent}">
                     
                 </ContentControl>
                 

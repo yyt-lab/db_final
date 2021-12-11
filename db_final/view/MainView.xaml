@@ -4,9 +4,156 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:db_final.view"
-        mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        mc:Ignorable="d" Name="window"
+        Title="MainView" Height="450" Width="600">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="UserNameTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True"
+                                CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <!--<ColumnDefinition Width="40"/>-->
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--使用textblock存放登录样式-->
+                                <!--<TextBlock Text="&#xe7ae;" FontFamily="../resources/fonts/#iconfont" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                         FontSize="25" Foreground="#ccc"/>-->
+                                <!--ScrollViewer中存放的是文本框承载的数据-->
+                                <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1" Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden" 
+                                              VerticalAlignment="Center"
+                                              MinHeight="20"
+                                              VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate TargetType="Button" x:Key="LoginButtonTemplate">
+            <Border Background="#007dfa" CornerRadius="5" Margin="0">
+                <!--templateBinding的方式，作用类似与函数参数的传递
+                    margin设置为先左后，再上下-->
+                <Grid>
+                    <Border CornerRadius="4" Background="#22ffffff" Name="back" Visibility="Hidden"/>
+                    <ContentControl Content="{TemplateBinding Content}"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                Foreground="{TemplateBinding Foreground}"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <!--设置触发器，通过修改属性，实现触发器-->
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Visibility" Value="Visible" TargetName="back"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Window.Resources>
+    <Border Background="#FFF6F6F6" CornerRadius="10" >
+        <Border.Effect>
+            <DropShadowEffect Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.3" Direction="0"/>
+        </Border.Effect>
     <Grid>
-        
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Background="#007dfa" Margin="20,10,20,0" CornerRadius="10" Height="100"/>
+                <TextBlock Text="图书信息添加" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="White"/>
+                <Border Grid.Row="1">
+                    <Border Margin="20,0,20,0" Background="white" Height="350" Width="560" VerticalAlignment="Top" CornerRadius="10"/>
+                </Border>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center"  Margin="30" Height="30">
+                        <TextBlock Text="图书信息" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding BookAddInfo.BookName}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="30" Height="30">
+                        <TextBlock Text="图书分类" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding BookAddInfo.BookCategory}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
+                        <TextBlock Text="作者信息" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding BookAddInfo.BookAuthor}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
+                        <TextBlock Text="图书链接" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding BookAddInfo. BookUrl}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="50,00,0,0">
+                        <TextBlock Text="图书信息简要描述" FontSize="16" />
+                        <TextBox Text="{Binding BookAddInfo.BookDescription}" FontSize="16"  Style="{DynamicResource UserNameTextBoxStyle}" Width="500" Margin="0,10,0,0" HorizontalAlignment="Left" Height="60"/>
+                        <Grid Margin="0,20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="确认" Height="30" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                   Foreground="White" FontWeight="Bold" Command="{Binding BtnOKPressed}" CommandParameter="{Binding ElementName=window}"
+                                                   Template="{StaticResource LoginButtonTemplate}" Click="Button_Click" />
+                            <Button Content="取消" Grid.Column="1" Height="30" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                   Foreground="White" FontWeight="Bold" Click="Button_Click"
+                                                   Template="{StaticResource LoginButtonTemplate}" />
+                            
+                        </Grid>
+                    </StackPanel>
+                        
+                </Grid>
+            </Grid> 
     </Grid>
+
+    </Border>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using db_final.viewmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace db_final.view
     /// </summary>
     public partial class MainView : Window
     {
+        public AddBookViewModel newbook;
         public MainView()
         {
             InitializeComponent();
+
+            this.DataContext =  new AddBookViewModel();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

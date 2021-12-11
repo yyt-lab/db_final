@@ -1,5 +1,7 @@
-﻿using System;
+﻿using db_final.viewmodel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,18 @@ namespace db_final.view
         public BooksInfo()
         {
             InitializeComponent();
+
+            this.DataContext = new BookInfoModel();
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(((Hyperlink)sender).NavigateUri.ToString());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new MainView().ShowDialog();
         }
     }
 }

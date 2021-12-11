@@ -6,7 +6,149 @@
              xmlns:local="clr-namespace:db_final.viewmodel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="RadioButton" x:Key="CategoryItemTemplate">
+            <Grid Background="Transparent">
+                <Border CornerRadius="10" Background="#EEE" Name="back" Margin="5,0,5,0">
+                    <TextBlock Text="{TemplateBinding Content}" Margin="20,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="DocumentViewerBase.Background" Value="#FF73AFFA" TargetName="back"></Setter>
+                    <Setter Property="FontWeight" Value="bold"/>
+                </Trigger>
+                
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="图书信息" FontSize="30"/>
+        <Border CornerRadius="5" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border BorderBrush="#DDD" BorderThickness="0,0,0,1">
+                    <Grid Margin="20,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="30"/>
+                            <RowDefinition MinHeight="30"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <ItemsControl >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton Content="全部" Template="{StaticResource CategoryItemTemplate}" IsChecked="True"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10">
+                            <TextBlock Text="图书分类   " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--<RadioButton Content="全部" Template="{StaticResource CategoryItemTemplate}" IsChecked="True"/>
+                            <RadioButton Content="理工类"  Template="{StaticResource CategoryItemTemplate}"/>
+                            <RadioButton Content="文学类" Template="{StaticResource CategoryItemTemplate}"/>
+                            <RadioButton Content="教材类"  Template="{StaticResource CategoryItemTemplate}"/>-->
+                            <ItemsControl ItemsSource="{Binding CategoryBooks}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton Content="{Binding CategoryName}" IsChecked="{Binding IsSelected}" 
+                                                     Template="{StaticResource CategoryItemTemplate}" GroupName="BooksInfo" 
+                                                     Command="{Binding DataContext.Category_MenuChanged,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"
+                                                     CommandParameter="{Binding CategoryName}"></RadioButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="20,10">
+                            <TextBlock Text="是否借出    " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--<RadioButton Content="所有" Template="{StaticResource CategoryItemTemplate}"/>
+                            <RadioButton Content="未借出" Template="{StaticResource CategoryItemTemplate}"/>
+                            <RadioButton Content="已借出" Template="{StaticResource CategoryItemTemplate}"/>-->
+                            <ItemsControl ItemsSource="{Binding IsBorrowed}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton Content="{Binding CategoryName}"  IsChecked="{Binding IsSelected}"
+                                                     Template="{StaticResource CategoryItemTemplate}" GroupName="StateInfo"
+                                                     Command="{Binding DataContext.Available_MenuChanged,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"
+                                                     CommandParameter="{Binding CategoryName}"></RadioButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <Button Content="+ 添加课程" Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Margin="20" Click="Button_Click"/>
+                    </Grid>
+                </Border>
+
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding BookInfoList_FromDB}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                             <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <!--<Border Height="90" Width="90"/>-->
+                        <StackPanel Height="90" Margin="20">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock  FontSize="18" FontWeight="Bold" >
+                                    <Hyperlink Foreground="Black" Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}" >
+                                        <Hyperlink.Style>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
+                                            </Style>
+                                        </Hyperlink.Style>
+                                        <TextBlock Text="{Binding BookName}" />
+                                    </Hyperlink>
+                                </TextBlock>
+                                
+                                <Border CornerRadius="5" Background="#eee" Height="20" Width="150" VerticalAlignment="Center" Margin="20,0,0,0">
+                                    <TextBlock Text="{Binding BookAuthor}" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                            <TextBlock Text="{Binding BookDescription}"
+                                       LineHeight="20" TextWrapping="Wrap" Foreground="#777" Margin="0,10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <TextBlock Margin="5,0">
+                                <Hyperlink  Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}">详情</Hyperlink>
+                            </TextBlock>
+                            <TextBlock Margin="5,0">
+                                <Hyperlink  Click="Hyperlink_Click"  NavigateUri="{Binding BookUrl}">删除</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                    
+                </ScrollViewer>
+                
+            </Grid>
+        </Border>
+        
     </Grid>
 </UserControl>
