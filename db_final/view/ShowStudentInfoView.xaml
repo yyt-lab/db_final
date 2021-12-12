@@ -150,7 +150,7 @@
                                     <GridViewColumn Header="书名" Width="200">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                    <TextBlock Text="{Binding bookname}" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                                    <TextBlock Text="{Binding bookname}" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/> 
                                                     <!--<TextBox Text="{Binding bookname}" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>-->
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
