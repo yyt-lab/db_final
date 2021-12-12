@@ -41,42 +41,15 @@ namespace db_final.view
     public partial class ShowStudentInfoView : Window
     {
 
-        private StudentModel context;
-        //private string
-        private ObservableCollection<string> BookInfos = new ObservableCollection<string>();
-
-
-        private ICollectionView bookinfoview_;
-
-        public ICollectionView BookInfoListView
-        {
-            get
-            {
-                return CollectionViewSource.GetDefaultView(BookInfos);
-            }
-            set { bookinfoview_ = value; }
-        }
-
+        
+        
         public ShowStudentInfoView()
         {
-            context  = new StudentModel();
+            //context  = new ShowSsInfoViewModel();
             InitializeComponent();
-            this.DataContext = context;
-            
-
+            this.DataContext = new ShowSsInfoViewModel();
         }
-        public void SetContext(StudentModel studentcontext)
-        {
-            context = studentcontext;
-            this.BookInfos.Clear();
-                BookInfos.Add("1121222");
-                BookInfos.Add("1121222");
-                BookInfos.Add("1121222");
-            foreach(var Item in context.BookNameList)
-            {
-                BookInfos.Add(Item);
-            }
-        }
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

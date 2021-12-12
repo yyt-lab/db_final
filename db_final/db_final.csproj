@@ -106,7 +106,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="model\booklistModel.cs" />
     <Compile Include="model\StudentModel.cs" />
+    <Compile Include="viewmodel\ShowSsInfoViewModel.cs" />
     <Compile Include="viewmodel\StudentBorrowModel.cs" />
     <Compile Include="view\ShowStudentInfoView.xaml.cs">
       <DependentUpon>ShowStudentInfoView.xaml</DependentUpon>

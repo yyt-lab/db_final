@@ -125,7 +125,7 @@ namespace db_final.viewmodel
         public void CheckStudentInfo(object o)
         {
             ShowStudentInfoView ShowInfo = new ShowStudentInfoView();
-            ShowInfo.SetContext(new StudentModel());
+            //ShowInfo.SetContext(new StudentModel());
             ShowInfo.Show();
             //new ShowStudentInfoView().ShowDialog();
         }

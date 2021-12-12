@@ -32,8 +32,8 @@
                     <ColumnDefinition Width=" 250"/>
                 </Grid.ColumnDefinitions>
 
-
-                <ListView Margin="20" Name="Users" ItemsSource="{Binding Path=StudnetListView}">
+                <ScrollViewer  >
+                    <ListView Margin="20" Name="Users" ItemsSource="{Binding Path=StudnetListView}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" >
@@ -89,6 +89,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                    
+                </ScrollViewer>
                 <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Button  Height="30" Width="100"  Margin="20" 
                             Command="{Binding btn_add}">
