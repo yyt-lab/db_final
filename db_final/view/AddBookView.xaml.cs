@@ -18,10 +18,9 @@ namespace db_final.view
     /// <summary>
     /// MainView.xaml 的交互逻辑
     /// </summary>
-    public partial class MainView : Window
+    public partial class AddBookView : Window
     {
-        public AddBookViewModel newbook;
-        public MainView()
+        public AddBookView()
         {
             InitializeComponent();
 

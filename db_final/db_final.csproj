@@ -106,6 +106,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="model\StudentModel.cs" />
+    <Compile Include="viewmodel\StudentBorrowModel.cs" />
+    <Compile Include="view\UserSearchView.xaml.cs">
+      <DependentUpon>UserSearchView.xaml</DependentUpon>
+    </Compile>
     <Page Include="resources\styles\DefaultStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +131,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="view\MainView.xaml">
+    <Page Include="view\AddBookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,9 +165,13 @@
     <Compile Include="view\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="view\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="view\AddBookView.xaml.cs">
+      <DependentUpon>AddBookView.xaml</DependentUpon>
     </Compile>
+    <Page Include="view\UserSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

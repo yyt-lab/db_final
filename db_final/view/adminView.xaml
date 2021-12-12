@@ -121,9 +121,10 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <RadioButton Content="首页" Style="{StaticResource NavButtonStyle}" IsChecked="True" 
                                  Command="{Binding NavCommandChanged}" CommandParameter="FirstPage"/>
-                    <RadioButton Content="图书信息" Style="{StaticResource NavButtonStyle}" IsChecked="True"
-                                  Command="{Binding NavCommandChanged}" CommandParameter="BooksInfo"/>
-                    <RadioButton Content="个人查询" Style="{StaticResource NavButtonStyle}" IsChecked="True"/>
+                    <RadioButton Content="图书信息" Style="{StaticResource NavButtonStyle}" IsChecked="False"
+                                 Command="{Binding NavCommandChanged}" CommandParameter="BooksInfo"/>
+                    <RadioButton Content="个人查询" Style="{StaticResource NavButtonStyle}" IsChecked="False"
+                                 Command="{Binding NavCommandChanged}" CommandParameter="UserSearchView"/>
                     <!--<RadioButton Content="年度统计"/>-->
                 </StackPanel>
 

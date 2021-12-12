@@ -25,8 +25,11 @@ namespace db_final
                 {
                     new adminView().ShowDialog();
                 }
-                else 
-                    new MainView().ShowDialog();  // 打开MainView,等待返回
+                else
+                {
+                    ;
+                    //new MainView().ShowDialog();  // 打开MainView,等待返回
+                } 
             }
             // 只有主窗口关闭的时候，才会关闭这个窗口
             Application.Current.Shutdown();

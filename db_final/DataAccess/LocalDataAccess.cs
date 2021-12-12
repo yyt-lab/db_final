@@ -242,7 +242,89 @@ namespace db_final.DataAccess
             }
         }
 
+        public List<StudentModel> GetStudentInfo()
+        {
+            try
+            {
+                List<StudentModel> StudentInfoList = new List<StudentModel>();
+                if(DBConnection())
+                {
+                    string sql = "select * from studentinfo";
+                    adapter = new MySqlDataAdapter(sql, conn);
+                    DataTable table = new DataTable();
+                    int count = adapter.Fill(table);
+                    if (count <= 0)
+                        throw new Exception("查询失败！");
+                    
+                    foreach (var item in table.AsEnumerable())
+                    {
+                        StudentModel newstudent = new StudentModel();
+                        newstudent.Name = item.Field<string>("Name");
+                        newstudent.StudentID = item.Field<string>("StudentID");
+                        newstudent.Depart = item.Field<string>("Depart");
+                        newstudent.BorrowNumber = item.Field<int>("BorrowNumber"); // 以列名的方式，得到列索引
+                        StudentInfoList.Add(newstudent);
+                    }
+                    List<StudentModel> result = StudentInfoList;
+                    return result;
 
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
+
+        public void SendStudent2DB(StudentModel StudentInfo)
+        {
+            string name = StudentInfo.Name;
+            string StudentID = StudentInfo.StudentID;
+            string Depart = StudentInfo.Depart;
+            int BorrowNumber = StudentInfo.BorrowNumber;
+
+            try
+            {
+                if (DBConnection())
+                {
+                    string parameter = " @Name , @StudentID , @Depart , @BorrowNumber ";
+                    string sql = "INSERT INTO `final_db`.`studentinfo` (`Name`, `StudentID`, `Depart`, `BorrowNumber`) VALUES (" + parameter + ");";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@Name", MySqlDbType.VarChar)
+                    {
+                        Value = name
+                    });
+                    cmd.Parameters.Add(new MySqlParameter("@StudentID", MySqlDbType.VarChar)
+                    {
+                        Value = StudentID
+                    });
+                    cmd.Parameters.Add(new MySqlParameter("@Depart", MySqlDbType.VarChar)
+                    {
+                        Value = Depart
+                    });
+                    cmd.Parameters.Add(new MySqlParameter("@BorrowNumber", MySqlDbType.Int32)
+                    {
+                        Value = BorrowNumber
+                    });
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
 
     }
 }
