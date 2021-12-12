@@ -6,6 +6,24 @@
              xmlns:local="clr-namespace:db_final.view"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ControlTemplate TargetType="Button" x:Key="ButtonItemTemplate">
+            <Grid Background="Transparent">
+                <Border CornerRadius="5" Background="#EEE" Name="back" Margin="5,0,5,0">
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="DocumentViewerBase.Background" Value="#FF73AFFA" TargetName="back"></Setter>
+                    <Setter Property="FontWeight" Value="bold"/>
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
     <Grid>
         <Border Background="White" CornerRadius="10">
             <Grid>
@@ -42,15 +60,32 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="BookBorrowed" Width="200" >
+                            <GridViewColumn Header="BookBorrowed" Width="110" >
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding BorrowNumber}" Width="188" HorizontalContentAlignment="Center"   Foreground="Blue" Cursor="Hand" />
+                                        <TextBox Text="{Binding BorrowNumber}" Width="88" HorizontalContentAlignment="Center"   Foreground="Blue" Cursor="Hand" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                                 
                             </GridViewColumn>
-                            
+
+                            <GridViewColumn Header="Property" Width="200" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Button Content="详情" Margin="20,0,0,0" Template="{StaticResource ButtonItemTemplate}" 
+                                                    Command="{Binding DataContext.Btn_CheckInfo,
+                                                    RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>
+                                            <!--<Button Content="删除" Margin="5,0,0,0" Template="{StaticResource ButtonItemTemplate}"
+                                                    Command="{Binding DataContext.Btn_Delete 
+                                                    RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>-->
+                                            
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+
+                            </GridViewColumn>
+
                         </GridView>
                     </ListView.View>
                 </ListView>

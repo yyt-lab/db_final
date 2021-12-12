@@ -1,6 +1,7 @@
 ﻿using db_final.Common;
 using db_final.DataAccess;
 using db_final.model;
+using db_final.view;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,10 +20,10 @@ namespace db_final.viewmodel
 
         public CommandBase btn_add { get; set; }
         public CommandBase btn_modifyok  { get; set; }
-
+        public CommandBase Btn_Delete { get; set; }
+        public CommandBase Btn_CheckInfo { get; set; }
         private ICollectionView studentlistview_;
 
-        private bool btn_Modifyok_valid = false;
         private int modify_num = 0;
         public ICollectionView StudnetListView
         {
@@ -34,6 +35,7 @@ namespace db_final.viewmodel
 
         public StudentBorrowModel()
         {
+            this.modify_num = 0;
             this.btn_add = new CommandBase();
             this.btn_add.DoCanExecute = new Func<object,bool>(CanAddEmpty);
             this.btn_add.DoExecute = new Action<object>(newEmptyStudent);
@@ -41,6 +43,14 @@ namespace db_final.viewmodel
             this.btn_modifyok = new CommandBase();
             this.btn_modifyok.DoCanExecute = new Func<object, bool>(CanModify);
             this.btn_modifyok.DoExecute = new Action<object>(SetModify2DB);
+
+            this.Btn_Delete = new CommandBase();
+            this.Btn_Delete.DoCanExecute = new Func<object, bool>((o)=>true);
+            this.Btn_Delete.DoExecute = new Action<object>(DeleteStudentInfo);
+
+            this.Btn_CheckInfo = new CommandBase();
+            this.Btn_CheckInfo.DoCanExecute = new Func<object, bool>((o) => true);
+            this.Btn_CheckInfo.DoExecute = new Action<object>(CheckStudentInfo);
 
             loaddata();
         }
@@ -69,7 +79,6 @@ namespace db_final.viewmodel
 
         public bool CanAddEmpty(object o)
         {
-            this.btn_Modifyok_valid = true;
             return true;
         }
 
@@ -112,7 +121,19 @@ namespace db_final.viewmodel
             
             modify_num = 0;
         }
-    }
 
+        public void CheckStudentInfo(object o)
+        {
+            ShowStudentInfoView ShowInfo = new ShowStudentInfoView();
+            ShowInfo.SetContext(new StudentModel());
+            ShowInfo.Show();
+            //new ShowStudentInfoView().ShowDialog();
+        }
+
+        public void DeleteStudentInfo(object o)
+        {
+
+        }
+    }
    
 }

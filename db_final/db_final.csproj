@@ -108,12 +108,19 @@
     </ApplicationDefinition>
     <Compile Include="model\StudentModel.cs" />
     <Compile Include="viewmodel\StudentBorrowModel.cs" />
+    <Compile Include="view\ShowStudentInfoView.xaml.cs">
+      <DependentUpon>ShowStudentInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\UserSearchView.xaml.cs">
       <DependentUpon>UserSearchView.xaml</DependentUpon>
     </Compile>
     <Page Include="resources\styles\DefaultStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ShowStudentInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="view\BooksInfo.xaml">
       <SubType>Designer</SubType>
