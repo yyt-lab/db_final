@@ -23,36 +23,29 @@ namespace db_final.view
     /// </summary>
 
 
-    //public class booklist
-    //{
-    //    string bookname;
-
-    //    public booklist()
-    //    {
-
-    //    }
-
-    //    public booklist(string name)
-    //    {
-    //        this.bookname = name;
-    //    }
-    //}
-
     public partial class ShowStudentInfoView : Window
     {
 
-        
+        ShowSsInfoViewModel context;
         
         public ShowStudentInfoView()
         {
-            //context  = new ShowSsInfoViewModel();
+            context = new ShowSsInfoViewModel();
             InitializeComponent();
-            this.DataContext = new ShowSsInfoViewModel();
+            this.DataContext = context;
         }
-       
+
+        public ShowStudentInfoView(StudentModel SsInfo)
+        {
+            context = new ShowSsInfoViewModel(SsInfo);
+            InitializeComponent();
+            this.DataContext = context;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
     }
 }

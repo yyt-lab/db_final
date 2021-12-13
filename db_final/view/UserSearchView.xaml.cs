@@ -27,6 +27,9 @@ namespace db_final.view
             this.DataContext = new StudentBorrowModel();
         }
 
-        
+        private void Button_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

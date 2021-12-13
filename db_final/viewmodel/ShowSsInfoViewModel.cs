@@ -33,22 +33,21 @@ namespace db_final.viewmodel
 
         public ShowSsInfoViewModel()
         {
-            this.StudentModel.Name = "111";
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("111"));
-            this.BookInfos.Add(new booklistModel("112"));
+            //this.StudentModel.Name = "111";
+
             this.BookInfos.Add(new booklistModel("113"));
         }
+
+
+        public ShowSsInfoViewModel(StudentModel SsInfo)
+        {
+            //this.StudentModel.Name = "111";
+
+            //this.BookInfos.Add(new booklistModel("113"));
+            StudentModel = SsInfo;
+
+        }
+
 
     }
 

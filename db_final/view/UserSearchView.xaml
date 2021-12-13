@@ -32,8 +32,8 @@
                     <ColumnDefinition Width=" 250"/>
                 </Grid.ColumnDefinitions>
 
-                <ScrollViewer  >
-                    <ListView Margin="20" Name="Users" ItemsSource="{Binding Path=StudnetListView}">
+                <ScrollViewer >
+                    <ListView Margin="20" Name="Users" ItemsSource="{Binding Path=StudnetListView}" SelectedIndex="0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" >
@@ -69,13 +69,14 @@
                                 
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Property" Width="200" >
+                            <GridViewColumn Header="Property" Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Button Content="详情" Margin="20,0,0,0" Template="{StaticResource ButtonItemTemplate}" 
-                                                    Command="{Binding DataContext.Btn_CheckInfo,
-                                                    RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>
+                                                    Command="{Binding DataContext.Btn_CheckInfo, 
+                                                        RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"
+                                                    CommandParameter="{Binding Name}"/>
                                             <!--<Button Content="删除" Margin="5,0,0,0" Template="{StaticResource ButtonItemTemplate}"
                                                     Command="{Binding DataContext.Btn_Delete 
                                                     RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>-->

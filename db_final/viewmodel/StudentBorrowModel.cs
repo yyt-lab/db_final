@@ -124,8 +124,16 @@ namespace db_final.viewmodel
 
         public void CheckStudentInfo(object o)
         {
-            ShowStudentInfoView ShowInfo = new ShowStudentInfoView();
-            //ShowInfo.SetContext(new StudentModel());
+            //MessageBox.Show(o.ToString());
+            int i;
+            for(i=0;i<studentCollection.Count();i++)
+            {
+                if (studentCollection.ElementAt(i).Name == o.ToString())
+                {
+                    break;
+                }
+            }
+            ShowStudentInfoView ShowInfo = new ShowStudentInfoView(studentCollection.ElementAt(i));
             ShowInfo.Show();
             //new ShowStudentInfoView().ShowDialog();
         }
