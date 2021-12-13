@@ -52,10 +52,10 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="StudentNumber" Width="200" >
+                            <GridViewColumn Header="StudentNumber" Width="160" >
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding StudentID}" Width="188" HorizontalContentAlignment="Center"   Foreground="Blue" Cursor="Hand" />
+                                        <TextBox Text="{Binding StudentID}" Width="148" HorizontalContentAlignment="Center"   Foreground="Blue" Cursor="Hand" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -69,7 +69,8 @@
                                 
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Property" Width="200">
+                            <GridViewColumn Header="Property" Width="100">
+                                
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -79,15 +80,29 @@
                                                     CommandParameter="{Binding Name}"/>
                                             <!--<Button Content="删除" Margin="5,0,0,0" Template="{StaticResource ButtonItemTemplate}"
                                                     Command="{Binding DataContext.Btn_Delete 
-                                                    RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>-->
-                                            
+                                                        RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"/>-->
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-
+                                
                             </GridViewColumn>
 
-                        </GridView>
+                                <GridViewColumn Header="Property" Width="100">
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <Button Content="删除" Margin="20,0,0,0" Template="{StaticResource ButtonItemTemplate}" 
+                                                    Command="{Binding DataContext.Btn_Delete, 
+                                                        RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"
+                                                    CommandParameter="{Binding Name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+
+                                </GridViewColumn>
+
+                            </GridView>
                     </ListView.View>
                 </ListView>
                     

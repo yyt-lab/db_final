@@ -155,7 +155,22 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                </GridView>
+                                    
+                                        <GridViewColumn Header="选项" Width="200">
+                                            
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <!--<TextBlock Text="{Binding bookname}" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>-->
+                                                    <Button Content="删除" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                            Command="{Binding DataContext.Btn_DeleteBorrowBook, 
+                                                                RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor}}" 
+                                                            CommandParameter="{Binding bookname}"/>
+                                                </DataTemplate>
+                                                            <!--Command="{Binding DataContext.Btn_DeleteBorrowBook,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}"-->
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+
+                                    </GridView>
                             </ListView.View>
                         </ListView>
                             

@@ -30,15 +30,15 @@ namespace db_final.view
         
         public ShowStudentInfoView()
         {
-            context = new ShowSsInfoViewModel();
+            //context = new ShowSsInfoViewModel();
             InitializeComponent();
-            this.DataContext = context;
+            //this.DataContext = context;
         }
 
         public ShowStudentInfoView(StudentModel SsInfo)
         {
-            context = new ShowSsInfoViewModel(SsInfo);
             InitializeComponent();
+            context = new ShowSsInfoViewModel(SsInfo);
             this.DataContext = context;
         }
 

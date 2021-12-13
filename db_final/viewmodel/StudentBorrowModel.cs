@@ -140,7 +140,7 @@ namespace db_final.viewmodel
 
         public void DeleteStudentInfo(object o)
         {
-
+            MessageBox.Show("hhh");
         }
     }
    

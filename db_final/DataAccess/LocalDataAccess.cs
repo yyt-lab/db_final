@@ -326,5 +326,83 @@ namespace db_final.DataAccess
             }
         }
 
+
+        public List<string> BorrowBook_Info(string studentID)
+        {
+            List<string> result;
+            List<string> BookNameList = new List<string>();
+            try
+            {
+                if (DBConnection())
+                {
+                    string sql = @"select distinct(BookName) from ss_borrow_table,borrow_table,bookinfo
+where ss_borrow_table.SsID = @StudendID and ss_borrow_table.BookNumber = bookinfo.BookNumber and borrow_table.Available = 1 and borrow_table.BookNumber = ss_borrow_table.BookNumber; ";
+                    adapter = new MySqlDataAdapter(sql, conn);
+                    adapter.SelectCommand.Parameters.Add(new MySqlParameter("@StudendID", MySqlDbType.VarChar)
+                    {
+                        Value = studentID
+                    });
+
+                    DataTable table = new DataTable();
+                    int count = adapter.Fill(table);
+
+
+                    if (count > 0)
+                    {
+                        foreach (var item in table.AsEnumerable())
+                        {
+                            string BookName;
+                            BookName = item.Field<string>("BookName");
+                            //bookinfos_fromdb.BookAuthor = "Author name : " + item.Field<string>("BookAuthor");
+                            //bookinfos_fromdb.BookName = item.Field<string>("BookName");
+                            //bookinfos_fromdb.BookUrl = item.Field<string>("BookUrl");
+                            //bookinfos_fromdb.BookDescription = item.Field<string>("BookDescription");
+                            BookNameList.Add(BookName);
+                        }
+                        result = BookNameList;
+                        return result;
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
+        public void DeleteBorrowBook(string BookName,string StudentID)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    string sql = "delete from ss_borrow_table where ss_borrow_table.SsID = @StudentID and ss_borrow_table.BookNumber in (select BookNumber from bookinfo where bookinfo.BookName = @BookName);";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@BookName", MySqlDbType.VarChar)
+                    {
+                        Value = BookName
+                    });
+
+                    cmd.Parameters.Add(new MySqlParameter("@StudentID", MySqlDbType.VarChar)
+                    {
+                        Value = StudentID
+                    });
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
     }
 }
