@@ -28,8 +28,8 @@ namespace db_final
                 else
                 {
                     ;
-                    //new MainView().ShowDialog();  // 打开MainView,等待返回
-                } 
+                    new UserView().ShowDialog();  // 打开MainView,等待返回
+                }
             }
             // 只有主窗口关闭的时候，才会关闭这个窗口
             Application.Current.Shutdown();

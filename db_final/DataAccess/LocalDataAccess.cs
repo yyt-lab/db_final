@@ -107,7 +107,6 @@ namespace db_final.DataAccess
                 this.Dispose();
             }
             return null;
-
         }
 
         public List<BookModel> GetBookInfos(string Category="全部",string State="全部")
@@ -466,6 +465,85 @@ where ss_borrow_table.SsID = @StudendID and ss_borrow_table.BookNumber = bookinf
                     });
                     cmd.ExecuteNonQuery();
                 }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+        public string GetSsID(string userName)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    string userSql = "select StudentID from studentinfo where Name = @userName";
+                    adapter = new MySqlDataAdapter(userSql, conn);
+                    adapter.SelectCommand.Parameters.Add(new MySqlParameter("@UserName", MySqlDbType.VarChar)
+                    {
+                        Value = userName
+                    });
+                    
+
+                    DataTable table = new DataTable();
+                    int count = adapter.Fill(table);
+
+                    
+
+                    DataRow dr = table.Rows[0];
+
+                    
+                    string SsID;
+                    SsID = dr.Field<string>("StudentID");
+                    
+                    return SsID;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
+
+        public StudentModel GetStudentInfo(string Sname)
+        {
+            try
+            {
+                StudentModel StudentInfoList = new StudentModel();
+                if (DBConnection())
+                {
+                    string sql = "select * from studentinfo where Name = @Name ";
+                    adapter = new MySqlDataAdapter(sql, conn);
+                    adapter.SelectCommand.Parameters.Add(new MySqlParameter("@Name", MySqlDbType.VarChar)
+                    {
+                        Value = Sname
+                    });
+
+                    DataTable table = new DataTable();
+                    int count = adapter.Fill(table);
+                    if (count <= 0)
+                        throw new Exception("查询失败！");
+                    StudentModel newstudent = new StudentModel();
+                    foreach (var item in table.AsEnumerable())
+                    {
+                        newstudent.Name = item.Field<string>("Name");
+                        newstudent.StudentID = item.Field<string>("StudentID");
+                        newstudent.Depart = item.Field<string>("Depart");
+                        newstudent.BorrowNumber = item.Field<int>("BorrowNumber"); // 以列名的方式，得到列索引
+                    }
+                    return newstudent;
+                }
+                return null;
             }
             catch (Exception e)
             {

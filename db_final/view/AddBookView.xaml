@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:db_final.view"
         mc:Ignorable="d" Name="window"
-        Title="AddBookView" Height="450" Width="600">
+        Title="学生信息添加" Height="450" Width="600">
     <Window.Resources>
 
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>

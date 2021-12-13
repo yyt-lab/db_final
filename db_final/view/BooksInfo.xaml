@@ -155,9 +155,7 @@
                 </ItemsControl>
                     
                 </ScrollViewer>
-                
             </Grid>
         </Border>
-        
     </Grid>
 </UserControl>

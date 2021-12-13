@@ -113,8 +113,14 @@
     <Compile Include="view\ShowStudentInfoView.xaml.cs">
       <DependentUpon>ShowStudentInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\UserPageName.xaml.cs">
+      <DependentUpon>UserPageName.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\UserSearchView.xaml.cs">
       <DependentUpon>UserSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Page Include="resources\styles\DefaultStyle.xaml">
       <SubType>Designer</SubType>
@@ -177,7 +183,15 @@
     <Compile Include="view\AddBookView.xaml.cs">
       <DependentUpon>AddBookView.xaml</DependentUpon>
     </Compile>
+    <Page Include="view\UserPageName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\UserSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

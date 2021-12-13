@@ -105,7 +105,7 @@
                 <Border Background="#007dfa" Margin="20,10,20,0" CornerRadius="10" Height="100"/>
                 <TextBlock Text="学生信息速览" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,10" Foreground="White"/>
                 <Border Grid.Row="1">
-                    <Border Margin="23,0,10.333,0" Background="white" Height="550" Width="560" VerticalAlignment="Top" CornerRadius="10"/>
+                    <Border Margin="23,0,10.333,0" Background="white" Height="550" VerticalAlignment="Top" CornerRadius="10"/>
                 </Border>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -150,13 +150,13 @@
                         </StackPanel>
                         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1">
                             <ListView Name="booksdisplay"
-                            ItemsSource="{Binding Path=BookInfoListView}" Width="450" Margin="10">
+                            ItemsSource="{Binding Path=BookInfoListView}"  Margin="10">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="书名" Width="200">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                    <TextBox Text="{Binding bookname}" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/> 
+                                                    <TextBox Text="{Binding bookname}" Width="180" Height="20" HorizontalAlignment="Center" TextAlignment="Center"/> 
                                                     <!--<TextBox Text="{Binding bookname}" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>-->
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>

@@ -41,6 +41,15 @@ namespace db_final.viewmodel
             DoNavChanged("FirstPage");
         }
 
+        public MainViewModel(string UserPageName)
+        {
+            this.NavCommandChanged = new CommandBase();
+            this.NavCommandChanged.DoExecute = new Action<object>(DoNavChanged);
+            this.NavCommandChanged.DoCanExecute = new Func<object, bool>((o) => true);
+
+            DoNavChanged(UserPageName);
+        }
+
 
         private void DoNavChanged(object obj)
         {
