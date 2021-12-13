@@ -22,6 +22,7 @@ namespace db_final.viewmodel
         public CommandBase btn_modifyok  { get; set; }
         public CommandBase Btn_Delete { get; set; }
         public CommandBase Btn_CheckInfo { get; set; }
+
         private ICollectionView studentlistview_;
 
         private int modify_num = 0;
@@ -140,7 +141,26 @@ namespace db_final.viewmodel
 
         public void DeleteStudentInfo(object o)
         {
-            MessageBox.Show("hhh");
+            try
+            {
+                LocalDataAccess.GetInstance().DeleteFromSsLib(o.ToString());
+                refreshlist();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("删除失败\n" + ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void refreshlist()
+        {
+            studentCollection.Clear();
+            loaddata();
+
         }
     }
    

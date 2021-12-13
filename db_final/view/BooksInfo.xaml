@@ -92,7 +92,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
-                        <Button Content="+ 添加课程" Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Margin="20" Click="Button_Click"/>
+                        <Button Content="+ 添加书籍" Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Margin="20" Click="Button_Click"/>
                     </Grid>
                 </Border>
 

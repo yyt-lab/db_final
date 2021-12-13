@@ -404,5 +404,78 @@ where ss_borrow_table.SsID = @StudendID and ss_borrow_table.BookNumber = bookinf
                 this.Dispose();
             }
         }
+
+
+        public void SendBorrowInfo2DB(string ID,string BookInfo)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    int booknumber = 0;
+                    string usersql1 = "select BookNumber from bookinfo where BookName = @BookName";
+                    MySqlCommand cmd = new MySqlCommand(usersql1, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@BookName", MySqlDbType.VarChar)
+                    {
+                        Value = BookInfo
+                    });
+                    MySqlDataReader read = cmd.ExecuteReader();
+                    if (read.Read()==false)
+                    {
+                        throw new Exception(" 书籍:"+ BookInfo + " 不存在");
+                    }
+                    booknumber = read.GetFieldValue<int>(0);
+                    cmd.Dispose();
+                    read.Close();
+
+                    string parameter = " @SsID , @BookNumber ";
+                    string sql = "INSERT INTO `final_db`.`ss_borrow_table` (`SsID`, `BookNumber`) VALUES (" + parameter + ");";
+                    cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@SsID", MySqlDbType.VarChar)
+                    {
+                        Value = ID
+                    });
+                    cmd.Parameters.Add(new MySqlParameter("@BookNumber", MySqlDbType.Int32)
+                    {
+                        Value = booknumber
+                    });
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
+        public void DeleteFromSsLib(string Name)
+        {
+            try
+            {
+                if (DBConnection())
+                {
+                    string sql = "delete from studentinfo where Name=@Name";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add(new MySqlParameter("@Name", MySqlDbType.VarChar)
+                    {
+                        Value = Name
+                    });
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                this.Dispose();
+            }
+        }
+
     }
 }

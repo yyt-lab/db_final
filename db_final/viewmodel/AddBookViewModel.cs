@@ -18,9 +18,11 @@ namespace db_final.viewmodel
         public CommandBase BtnOKPressed { get; set; } = new CommandBase();
         public AddBookViewModel()
         {
-            this.BookAddInfo.BookAuthor = "yyt";
-            this.BookAddInfo.BookUrl = "yyt";
-            this.BookAddInfo.BookDescription = "yyt";
+            this.BookAddInfo.BookName = "请输入作者名称";
+            this.BookAddInfo.BookAuthor = "请输入作者名称";
+            this.BookAddInfo.Category = "请输入作者名称";
+            this.BookAddInfo.BookUrl = "请输入图书链接";
+            this.BookAddInfo.BookDescription = "请输入书籍描述信息";
             this.BtnOKPressed.DoCanExecute = new Func<object, bool>((o) => true);
             this.BtnOKPressed.DoExecute = new Action<object>(Send2DB);
         }

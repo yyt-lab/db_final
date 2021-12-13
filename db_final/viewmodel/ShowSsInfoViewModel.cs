@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace db_final.viewmodel
@@ -18,13 +19,19 @@ namespace db_final.viewmodel
     {
         public StudentModel StudentModel { get; set; } = new StudentModel();
         public CommandBase Btn_DeleteBorrowBook { get; set; }
-
+        public CommandBase Btn_addBookInfo { get; set; }
+        public CommandBase BtnOKPressed { get; set; }
+        
         private ObservableCollection<booklistModel> BookInfos = new ObservableCollection<booklistModel>();
 
 
         private ICollectionView bookinfoview_;
 
         private List<string> BooksfromDB = new List<string>();
+
+        private bool modify_flag = false;
+
+        private int add_book_num = 0;
         public ICollectionView BookInfoListView
         {
             get
@@ -51,6 +58,17 @@ namespace db_final.viewmodel
             this.Btn_DeleteBorrowBook.DoCanExecute = new Func<object,bool>((o) => true);
             this.Btn_DeleteBorrowBook.DoExecute = new Action<object>(DeleteBookBorrowInfo);
 
+
+            this.Btn_addBookInfo = new CommandBase();
+            this.Btn_addBookInfo.DoCanExecute = new Func<object, bool>((o) => true);
+            this.Btn_addBookInfo.DoExecute = new Action<object>(AddBookBorrowInfo);
+
+            this.BtnOKPressed = new CommandBase();
+            this.BtnOKPressed.DoCanExecute = new Func<object, bool>((o) => true);
+            this.BtnOKPressed.DoExecute = new Action<object>(BookBorrowOK);
+
+            this.modify_flag = false;
+            this.add_book_num = 0;
             StudentModel = SsInfo;
             BooksfromDB = LocalDataAccess.GetInstance().BorrowBook_Info(StudentModel.StudentID);
             foreach(var item in BooksfromDB)
@@ -74,6 +92,55 @@ namespace db_final.viewmodel
             {
                 this.BookInfos.Add(new booklistModel(item));
             }
+            modify_flag = true;
+        }
+
+        private void AddBookBorrowInfo(object o)
+        {
+            add_book_num++;
+            modify_flag = true;
+            this.BookInfos.Add(new booklistModel("请输入书名"));
+        }
+
+        private void BookBorrowOK(object o)
+        {
+            //MessageBox.Show("若不需要修改，请点击取消按键");
+
+            if (modify_flag == false)
+            {
+                MessageBox.Show("若不需要修改，请点击取消按键");
+                return;
+            }
+
+            int len = BookInfos.Count();
+            List<int> removenum = new List<int>();
+            for (int i = len; i > len - add_book_num; i--)
+            {
+                booklistModel newss = BookInfos.ElementAt(i - 1);
+                //MessageBox.Show(newss.Name+" "+newss.Depart);
+                try
+                {
+                    LocalDataAccess.GetInstance().SendBorrowInfo2DB(StudentModel.StudentID,newss.bookname);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("插入失败"+ex.Message);
+                    removenum.Add(i-1);
+                }
+            }
+            if (removenum.Count() != 0)
+            {
+                foreach (var item in removenum)
+                {
+                    BookInfos.RemoveAt(item - 1);
+                }
+            }
+
+
+            add_book_num = 0;
+            (o as Window).Close();
+            //this.BookInfos.Add(new booklistModel("请输入书名"));
+
         }
 
 

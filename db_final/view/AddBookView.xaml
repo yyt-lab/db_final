@@ -123,7 +123,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="30" Height="30">
                         <TextBlock Text="图书分类" FontSize="16" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding BookAddInfo.BookCategory}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding BookAddInfo.Category}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
                         <TextBlock Text="作者信息" FontSize="16" VerticalAlignment="Center"/>
