@@ -125,12 +125,12 @@ namespace db_final.DataAccess
                     {
                         sql = "select * from final_db.bookinfo , borrow_table where bookinfo.BookNumber = borrow_table.BookNumber and ";
                         sql += "Category=\"" + Category + "\" and ";
-                        sql += "available=" + ((State == "已借出") ? "0" : "1");
+                        sql += "available" + ((State == "已借出") ? "=0" : ">0");
                     }else if (Category == "全部" )
                     {
                         sql = "select * from final_db.bookinfo , borrow_table where bookinfo.BookNumber = borrow_table.BookNumber ";
                         sql += "and ";
-                        sql += "available=" + ((State == "已借出") ? "0" : "1");
+                        sql += "available" + ((State == "已借出") ? "=0" : ">1");
                     }else if (State=="全部")
                     {
                         sql = "select * from final_db.bookinfo , borrow_table where bookinfo.BookNumber = borrow_table.BookNumber ";
@@ -287,7 +287,10 @@ namespace db_final.DataAccess
             string StudentID = StudentInfo.StudentID;
             string Depart = StudentInfo.Depart;
             int BorrowNumber = StudentInfo.BorrowNumber;
-
+            if(name == "请输入姓名"|| Depart == "请输入学院"|| StudentID == "请输入学生ID")
+            {
+                throw new Exception("请插入正确学生信息");
+            }
             try
             {
                 if (DBConnection())
@@ -335,7 +338,7 @@ namespace db_final.DataAccess
                 if (DBConnection())
                 {
                     string sql = @"select distinct(BookName) from ss_borrow_table,borrow_table,bookinfo
-where ss_borrow_table.SsID = @StudendID and ss_borrow_table.BookNumber = bookinfo.BookNumber and borrow_table.Available = 1 and borrow_table.BookNumber = ss_borrow_table.BookNumber; ";
+where ss_borrow_table.SsID = @StudendID and ss_borrow_table.BookNumber = bookinfo.BookNumber and borrow_table.BookNumber = ss_borrow_table.BookNumber; ";
                     adapter = new MySqlDataAdapter(sql, conn);
                     adapter.SelectCommand.Parameters.Add(new MySqlParameter("@StudendID", MySqlDbType.VarChar)
                     {

@@ -37,8 +37,8 @@ namespace db_final.viewmodel
             this.btn_delete.DoCanExecute = new Func<object, bool>((o) => true);
             this.btn_delete.DoExecute = new Action<object>(DeleteDromDB);
 
-            this.CurrentCategory = "";
-            this.CurrentState = "";
+            this.CurrentCategory = "全部";
+            this.CurrentState = "全部";
 
             InitCategory();
             InitBookInfo();
@@ -68,7 +68,7 @@ namespace db_final.viewmodel
             CurrentCategory = o.ToString();
             BookInfoList_FromDB.Clear();
 
-            foreach (var item in LocalDataAccess.GetInstance().GetBookInfos(Category: CurrentCategory))
+            foreach (var item in LocalDataAccess.GetInstance().GetBookInfos(State: CurrentState, Category: CurrentCategory))
             {
                 BookInfoList_FromDB.Add(item);
             }
@@ -78,7 +78,7 @@ namespace db_final.viewmodel
             CurrentState = o.ToString();
             BookInfoList_FromDB.Clear();
             //BookInfoList_FromDB = new ObservableCollection<BookModel>(LocalDataAccess.GetInstance().GetBookInfos(State: CurrentState));
-            foreach (var item in LocalDataAccess.GetInstance().GetBookInfos(State: CurrentState))
+            foreach (var item in LocalDataAccess.GetInstance().GetBookInfos(State: CurrentState,Category: CurrentCategory))
             {
                 BookInfoList_FromDB.Add(item);
             }

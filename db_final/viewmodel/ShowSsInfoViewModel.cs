@@ -51,7 +51,7 @@ namespace db_final.viewmodel
         }
 
 
-        public ShowSsInfoViewModel(StudentModel SsInfo)
+        public ShowSsInfoViewModel(StudentModel SsInfo)  // 管理员界面信息
         {
             //this.StudentModel.Name = "111";
             this.Btn_DeleteBorrowBook = new CommandBase();
@@ -72,9 +72,17 @@ namespace db_final.viewmodel
             //StudentModel = SsInfo;
             StudentModel = LocalDataAccess.GetInstance().GetStudentInfo(SsInfo.Name); // 刷新数据信息
             BooksfromDB = LocalDataAccess.GetInstance().BorrowBook_Info(StudentModel.StudentID);
-            foreach(var item in BooksfromDB)
+            if (BooksfromDB == null)
             {
-                this.BookInfos.Add(new booklistModel(item));
+                ;
+            }
+            else
+            {
+                foreach(var item in BooksfromDB)
+                {
+                    this.BookInfos.Add(new booklistModel(item));
+                }
+
             }
         }
 
@@ -119,9 +127,16 @@ namespace db_final.viewmodel
             this.BookInfos.Clear();
 
             BooksfromDB = LocalDataAccess.GetInstance().BorrowBook_Info(StudentModel.StudentID);
-            foreach (var item in BooksfromDB)
+            if (BooksfromDB != null)
             {
-                this.BookInfos.Add(new booklistModel(item));
+                foreach (var item in BooksfromDB)
+                {
+                    this.BookInfos.Add(new booklistModel(item));
+                }
+            }
+            else
+            {
+
             }
             StudentModel.BorrowNumber = LocalDataAccess.GetInstance().GetStudentInfo(this.StudentModel.Name).BorrowNumber; // 刷新数据信息
             modify_flag = true;
@@ -153,6 +168,7 @@ namespace db_final.viewmodel
                 try
                 {
                     LocalDataAccess.GetInstance().SendBorrowInfo2DB(StudentModel.StudentID,newss.bookname);
+                    this.StudentModel.BorrowNumber++;
                 }
                 catch (Exception ex)
                 {

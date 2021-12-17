@@ -129,7 +129,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
                 <TextBlock Text="用户名称" FontSize="20" VerticalAlignment="Top" Foreground="#007dfa" FontWeight="Bold" Margin="0,2,0,0"/>
-                <TextBox Text="yyt" FontSize="20" Height="30" Foreground="#555" FontWeight="Bold" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding StudentModel.Name}" FontSize="20" Height="30" Foreground="#555" FontWeight="Bold" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="50,00,0,0">
             </StackPanel>
