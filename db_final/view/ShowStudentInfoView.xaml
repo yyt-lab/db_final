@@ -131,7 +131,7 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
                         <TextBlock Text="借阅本数" FontSize="16" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding StudentModel.BorrowNumber}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding StudentModel.BorrowNumber,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Height="25" Foreground="#555" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="50,00,0,0">
                     </StackPanel>

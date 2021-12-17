@@ -110,7 +110,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <!--<ColumnDefinition/>-->
             </Grid.ColumnDefinitions>
             <Border Margin="15,15,15,100" Background="#FF3A7FDE" CornerRadius="30">
                 <Border.Effect>
@@ -123,8 +123,9 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="1">
                         <TextBlock  Margin="20" FontSize="18" Text="欢迎使用NWPU图书馆管理系统" Foreground="White" FontWeight="Bold"></TextBlock>
-                        <TextBlock Margin="20,0,20,0" LineHeight="20" FontSize="18"  Foreground="White"
-                                   Text="您可以查看图书信息，查看学生状态信息，还可以完成书籍增加、删除和修改以及对学生借阅、续借、归还的确认。"
+                        <TextBlock Margin="20,0,20,0" LineHeight="30" FontSize="18"  Foreground="White"
+                                   Text="您可以查看图书信息，查看学生状态信息，还可以完成书籍增加、删除和修改以及对学生借阅、续借、归还的确认,
+                                   可以在图书信息界面查看图书信息，可以在个人信息查询界面完成对个人信息的添加删除。"
                                    TextWrapping="Wrap" ></TextBlock>
                     </StackPanel>
                     <TextBlock></TextBlock>

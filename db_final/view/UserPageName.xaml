@@ -72,6 +72,8 @@
             </Style.Triggers>
         </Style>
 
+
+
         <ControlTemplate TargetType="Button" x:Key="LoginButtonTemplate">
             <Border Background="{TemplateBinding Background}" CornerRadius="5" Margin="0">
                 <!--templateBinding的方式，作用类似与函数参数的传递
@@ -126,8 +128,8 @@
                 <TextBox Text="{Binding StudentModel.Depart}" FontSize="20" Height="30" Foreground="#555" FontWeight="Bold" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center"  Margin="0" Height="30">
-                <TextBlock Text="借阅本数" FontSize="20" VerticalAlignment="Center" Foreground="#007dfa" FontWeight="Bold"/>
-                <TextBox Text="{Binding StudentModel.BorrowNumber}" FontSize="20" Height="30" Foreground="#555" FontWeight="Bold" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
+                <TextBlock Text="用户名称" FontSize="20" VerticalAlignment="Top" Foreground="#007dfa" FontWeight="Bold" Margin="0,2,0,0"/>
+                <TextBox Text="yyt" FontSize="20" Height="30" Foreground="#555" FontWeight="Bold" Margin="10,0,0,0" Width="150" Style="{DynamicResource UserNameTextBoxStyle}" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="50,00,0,0">
             </StackPanel>

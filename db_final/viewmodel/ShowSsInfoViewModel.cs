@@ -69,7 +69,8 @@ namespace db_final.viewmodel
 
             this.modify_flag = false;
             this.add_book_num = 0;
-            StudentModel = SsInfo;
+            //StudentModel = SsInfo;
+            StudentModel = LocalDataAccess.GetInstance().GetStudentInfo(SsInfo.Name); // 刷新数据信息
             BooksfromDB = LocalDataAccess.GetInstance().BorrowBook_Info(StudentModel.StudentID);
             foreach(var item in BooksfromDB)
             {
@@ -122,7 +123,7 @@ namespace db_final.viewmodel
             {
                 this.BookInfos.Add(new booklistModel(item));
             }
-            StudentModel = LocalDataAccess.GetInstance().GetStudentInfo(this.StudentModel.Name); // 刷新数据信息
+            StudentModel.BorrowNumber = LocalDataAccess.GetInstance().GetStudentInfo(this.StudentModel.Name).BorrowNumber; // 刷新数据信息
             modify_flag = true;
         }
 
@@ -193,6 +194,7 @@ namespace db_final.viewmodel
                 try
                 {
                     LocalDataAccess.GetInstance().SendBorrowInfo2DB(StudentModel.StudentID, newss.bookname);
+                    this.StudentModel.BorrowNumber++;
                 }
                 catch (Exception ex)
                 {
